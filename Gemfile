@@ -57,3 +57,6 @@ gem 'dotenv-rails'
 #to allow us to easily make requests to Shopify's REST API
 gem 'rest-client'
 gem 'shopify_api'
+gem 'pry'
+gem 'simple_form'
+gem 'bootstrap', '~> 4.2.1' 
