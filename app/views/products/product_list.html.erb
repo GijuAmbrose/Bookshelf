@@ -6,18 +6,22 @@
 <body>
 		*************************************
 		<div>
-			<div>
-				<p>Product Name: <%= @product["product"]["title"]%></p>
-				<% @product["product"]["images"].each do |img| %>
-					<img src='<%=img["src"]%>'>
-				<%end%>
-				<% @product["product"]["variants"].each do |variant|%>
-					<p>Available Product Quantity: <%= variant["inventory_quantity"]%></p>
-					<p>Product Price: <%=variant["price"]%></p>
-				<%end%>
-				<p>Quantity<%=text_field_tag (:qty)%></p>
-					<%=link_to "checkout", products_checkout_path()%>
-			</div>
+			<%= form_tag(products_create_order_path, {method: :get}) do%>
+				<div>
+					<p>Product Name: <%= @product["product"]["title"]%></p>
+					<% @product["product"]["images"].each do |img| %>
+						<img src='<%=img["src"]%>'>
+					<%end%>
+					<% @product["product"]["variants"].each do |variant|%>
+						<p>Variant Name: <%= variant["title"]%>
+						<p>Available Product Quantity: <%= variant["inventory_quantity"]%></p>
+						<p>Product Price: <%=variant["price"]%></p>
+						<p>Quantity<%=text_field_tag ("qty")%></p>
+						<%= hidden_field_tag "var_id", variant["id"] %>
+						<%=button_tag "Create Order"%>
+					<%end%>
+				</div>
+			<%end%>	
 		</div>
 
 </body>

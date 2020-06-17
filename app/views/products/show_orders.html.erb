@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+	<title>Orders List</title>
+</head>
+<body>
+<table>
+	<tr>
+		<th>Order Id</th>
+		<th>Product Name</th>
+		<th>Quantity</th>
+		<th>Total Amout</th>
+		<th>Date</th>
+	</tr>
+	<% @orders["orders"].each do |order|%>
+		<td><%=order["id"]%></td>
+		<td><%=order["line_items"].map{|x| x["title"]}%></td>
+		<td><%=order["line_items"].map{|x| x["quantity"]}%></td>
+		<td><%=order["line_items"].map{|x| x["price"]}%></td>
+		<td><%=order["created_at"]%></td>
+		<tr>
+	<%end%>		
+		</tr>
+</table>
+</body>
+</html>

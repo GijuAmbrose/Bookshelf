@@ -14,8 +14,9 @@ class ProductsController < ApplicationController
     @products = JSON.parse(products)
   end
 
-  def payment
-    RestClient.get("https://#{ENV['SHOPIFY_API_KEY']}:#{ENV['SHOPIFY_API_PASSWORD']}@myownbookshelf.myshopify.com/admin/api/2020-04/shopify_payments/payouts/623721858.json")
+  def create_order
+    RestClient.post("https://#{ENV['SHOPIFY_API_KEY']}:#{ENV['SHOPIFY_API_PASSWORD']}@myownbookshelf.myshopify.com/admin/api/2020-04/orders.json",:order=> {"line_items": [{"variant_id": params["var_id"] , "quantity": params["qty"]}]})
+    redirect_to root_path
   end
 
   def send_email
@@ -27,4 +28,10 @@ class ProductsController < ApplicationController
     @product = JSON.parse(product)
   end
 
+  def show_orders
+    orders = RestClient.get("https://#{ENV['SHOPIFY_API_KEY']}:#{ENV['SHOPIFY_API_PASSWORD']}@myownbookshelf.myshopify.com/admin/api/2020-04/orders.json?status=any")
+    @orders = JSON.parse(orders)
+  end
+
 end
+

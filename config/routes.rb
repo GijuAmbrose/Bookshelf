@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   get '/products/create'
   get '/products/show'
   get '/products/product_list'
-  get '/products/checkout'
+  get '/products/create_order'
+  get '/products/show_orders'
 end
